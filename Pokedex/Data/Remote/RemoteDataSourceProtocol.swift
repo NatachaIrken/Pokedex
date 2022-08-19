@@ -7,6 +7,7 @@
 
 import Foundation
 
-protocol PokemonListResponseProtocol {
-
+protocol RemoteDataSourceProtocol {
+    func fetchPokemon(completion:@escaping([PokemonListDTO]?) -> ())
 }
+
