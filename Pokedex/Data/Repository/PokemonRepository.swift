@@ -30,7 +30,8 @@ struct PokemonRepository: PokemonRepositoryProtocol {
                     imageUrl: pokemonDTO.imageUrl,
                     name: pokemonDTO.name,
                     type: pokemonDTO.type,
-                    weight: pokemonDTO.weight)
+                    weight: pokemonDTO.weight
+                )
             }
         })
     }
