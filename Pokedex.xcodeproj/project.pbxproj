@@ -57,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		632B5CF128AF1E5A00A7EA7E /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				63AADE9A28AEC43C00734FE8 /* PokemonRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		63AADE9628AEC33200734FE8 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,8 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				63D6AD1F28AD68D10048BF72 /* Presentation */,
-				63D6AD1D28AD68A70048BF72 /* Data */,
 				63D6AD1B28AD685F0048BF72 /* Domain */,
+				63D6AD1D28AD68A70048BF72 /* Data */,
 				63D6AD2A28AD7C6B0048BF72 /* Extension */,
 				63D6AD1028AD683D0048BF72 /* Assets.xcassets */,
 				63D6AD1228AD683D0048BF72 /* LaunchScreen.storyboard */,
@@ -137,7 +145,7 @@
 			children = (
 				63D6AD1C28AD68940048BF72 /* Model */,
 				63D6AD1E28AD68B30048BF72 /* Remote */,
-				63AADE9A28AEC43C00734FE8 /* PokemonRepository.swift */,
+				632B5CF128AF1E5A00A7EA7E /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -405,8 +413,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 48W2JRKUKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -421,6 +431,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = vikies.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -432,8 +443,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 48W2JRKUKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -448,6 +461,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = vikies.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
