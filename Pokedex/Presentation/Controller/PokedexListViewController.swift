@@ -8,17 +8,11 @@
 import UIKit
 
 class PokedexListViewController: UIViewController {
-    var viewModel = PokemonListViewModel()
 
+    var viewModel: PokemonListViewModelProtocol!
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+ //       viewModel.getPokemon()
         view.backgroundColor = .red
-
-
     }
-
-
-
 }
