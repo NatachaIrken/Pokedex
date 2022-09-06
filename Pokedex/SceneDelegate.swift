@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let windowScene = (scene as? UIWindowScene) else {return}
@@ -19,7 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
 //        let colectionView = UICollectionViewFlowLayout()
-        let navController = UINavigationController(rootViewController: PokedexListViewController())
+        let remote = RemoteDataSource()
+        let repository = PokemonRepository(dataSource: remote)
+        let fetchPokemonUseCase = FetchPokemonUseCase(pokemonRepository: repository)
+        
+        let viewModel = PokemonListViewModel(fetchPokemonUseCase: fetchPokemonUseCase)
+        let navController = UINavigationController(rootViewController: PokedexListViewController(viewModel: viewModel))
         window?.rootViewController = navController
     }
 

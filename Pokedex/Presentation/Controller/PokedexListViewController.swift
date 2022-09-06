@@ -11,8 +11,17 @@ class PokedexListViewController: UIViewController {
 
     var viewModel: PokemonListViewModelProtocol!
 
+    init(viewModel: PokemonListViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
- //       viewModel.getPokemon()
+        viewModel.getPokemon()
         view.backgroundColor = .red
     }
 }

@@ -27,6 +27,7 @@ class PokemonListViewModel: PokemonListViewModelProtocol {
     func getPokemon() {
         fetchPokemonUseCase.execute { pokemonList in
             self.getPokemonCallback?(pokemonList)
+            print(pokemonList)
         }
     }
 }
