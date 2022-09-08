@@ -21,7 +21,7 @@ struct PokemonListModel: Identifiable {
     let weight: Int
 
 }
-
+//
 //struct EvolutionChain {
 //    var id : String?
 //    var name: String?
