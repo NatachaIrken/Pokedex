@@ -44,9 +44,8 @@ class PokedexListViewController: UIViewController {
         ])
     }
 
-    // solo para pruebas
     func getPokemons() {
-        
+
         viewModel.getPokemon { [weak self] pokemonList in
             self?.pokemonList = pokemonList
             DispatchQueue.main.async {
@@ -64,6 +63,7 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+    //    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].description ?? ""
