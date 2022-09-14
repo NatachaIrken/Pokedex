@@ -11,13 +11,13 @@ struct PokemonListDTO: Decodable, Identifiable {
     let attack: Int
     let defense: Int
     let description: String
-//    let evolutionChain: [EvolutionChain]?
     let height: Int
     let id: Int
     let imageUrl: String
     let name: String
     let type: String
     let weight: Int
+//    let evolutionChain: [EvolutionChain]?
 
     enum CodingKeys: String, CodingKey {
         case attack
@@ -33,7 +33,7 @@ struct PokemonListDTO: Decodable, Identifiable {
     }
 }
 
-//struct EvolutionChain: Codable {
+//struct EvolutionChain: Decodable {
 //    var id : String?
 //    var name: String?
 //}

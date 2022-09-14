@@ -19,9 +19,9 @@ struct PokemonRepository: PokemonRepositoryProtocol {
     func fetchPokemon(completion: @escaping ([PokemonListModel]?) -> ()) {
 
         dataSource.fetchPokemon(completion: { pokemonListDTO in
-            pokemonListDTO?.forEach { pokemonDTO in
+            let pokemonListModel = pokemonListDTO?.map { pokemonDTO in
 
-                var pokemonListModel = PokemonListModel(
+                PokemonListModel(
                     attack: pokemonDTO.attack,
                     defense: pokemonDTO.defense,
                     description: pokemonDTO.description,
@@ -33,6 +33,8 @@ struct PokemonRepository: PokemonRepositoryProtocol {
                     weight: pokemonDTO.weight
                 )
             }
+            completion(pokemonListModel)
+            print("REPOSITORY",pokemonListModel)
         })
     }
 }

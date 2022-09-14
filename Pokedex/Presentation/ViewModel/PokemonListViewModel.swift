@@ -11,24 +11,27 @@ protocol PokemonListViewModelProtocol  {
 
     var getPokemonCallback: (([PokemonListModel]?) -> Void)? { get set }
 
-    func getPokemon()
+    func getPokemon(completion: @escaping([PokemonListModel]?) -> ())
 }
 
 class PokemonListViewModel: PokemonListViewModelProtocol {
 
+    func getPokemon(completion: @escaping ([PokemonListModel]?) -> ()) {
+        fetchPokemonUseCase.execute { pokemonList in
+//            self.getPokemonCallback?(pokemonList)
+            completion(pokemonList)
+//            print(pokemonList)
+        }
+    }
+
     var getPokemonCallback: (([PokemonListModel]?) -> Void)?
+
+    var pokemonModel: [PokemonListModel]?
 
     let fetchPokemonUseCase: FetchPokemonUseCase
 
     init(fetchPokemonUseCase: FetchPokemonUseCase) {
         self.fetchPokemonUseCase = fetchPokemonUseCase
-    }
-
-    func getPokemon() {
-        fetchPokemonUseCase.execute { pokemonList in
-            self.getPokemonCallback?(pokemonList)
-            print(pokemonList)
-        }
     }
 }
 

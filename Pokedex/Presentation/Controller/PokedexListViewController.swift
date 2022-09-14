@@ -12,7 +12,7 @@ class PokedexListViewController: UIViewController {
 
 
     var viewModel: PokemonListViewModelProtocol!
-    var pokemonList = [PokemonListModel]()
+    var pokemonList: [PokemonListModel]?
     var tableView = UITableView()
 
     init(viewModel: PokemonListViewModelProtocol) {
@@ -25,8 +25,8 @@ class PokedexListViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        viewModel.getPokemon()
         view.backgroundColor = .systemCyan
+        getPokemons()
         prepareTableView()
     }
 
@@ -43,21 +43,31 @@ class PokedexListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+
+    // solo para pruebas
+    func getPokemons() {
+        
+        viewModel.getPokemon { [weak self] pokemonList in
+            self?.pokemonList = pokemonList
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
 }
 
 extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        150
-        // aqui contar pokemones pokemonlist.count
+        self.pokemonList?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celda = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-//        celda.textLabel?.text = pokemonList.[indexPath.row].name
-        celda.detailTextLabel?.text = "detalle pokemon"
-//        celda.imageView?.image = "highlighter"
-        return celda
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+
+        cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
+        cell.detailTextLabel?.text = pokemonList?[indexPath.row].description ?? ""
+        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
