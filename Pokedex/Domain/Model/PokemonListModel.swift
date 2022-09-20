@@ -12,7 +12,7 @@ struct PokemonListModel: Identifiable {
     let attack: Int
     let defense: Int
     let description: String
-//    let evolutionChain: [EvolutionChain]?
+ //   let evolutionChain: [EvolutionChain]?
     let height: Int
     let id: Int
     let imageUrl: String
@@ -21,8 +21,8 @@ struct PokemonListModel: Identifiable {
     let weight: Int
 
 }
-//
-//struct EvolutionChain {
-//    var id : String?
-//    var name: String?
-//}
+
+struct EvolutionChain: Decodable {
+    var id : String?
+    var name: String?
+}

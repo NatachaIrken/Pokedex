@@ -25,6 +25,7 @@ struct PokemonRepository: PokemonRepositoryProtocol {
                     attack: pokemonDTO.attack,
                     defense: pokemonDTO.defense,
                     description: pokemonDTO.description,
+//                   evolutionChain: pokemonDTO.[EvolutionChain()]?,
                     height: pokemonDTO.height,
                     id: pokemonDTO.id,
                     imageUrl: pokemonDTO.imageUrl,

@@ -10,7 +10,6 @@ import UIKit
 
 class PokedexListViewController: UIViewController {
 
-
     var viewModel: PokemonListViewModelProtocol!
     var pokemonList: [PokemonListModel]?
     var tableView = UITableView()
@@ -26,12 +25,20 @@ class PokedexListViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = .systemCyan
+        setUpNavigation()
         getPokemons()
         prepareTableView()
     }
 
+    func setUpNavigation() {
+        navigationItem.title = "Pokedex"
+        self.navigationController?.navigationBar.barTintColor = .systemCyan
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+
     func prepareTableView() {
         view.addSubview(tableView)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,8 +69,8 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-    //    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        //      let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].description ?? ""
@@ -73,5 +80,31 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+
+    func pokeImageView() {
+
+        let pokeImage: UIImageView = {
+
+            let img = UIImageView()
+            img.contentMode = .scaleAspectFill
+            img.translatesAutoresizingMaskIntoConstraints = false
+            img.layer.cornerRadius = 35
+            img.clipsToBounds = true
+
+            return img
+        }()
+    }
+
+  //  let nameLabel: UILabel = {
+
+     //   let label = UILabel()
+    //    label.font = UIFont.boldSystemFont(ofSize: 20)
+    //    label.translatesAutoresizingMaskIntoConstraints = false
+
+   //     return label
+   // }()
+
+
 }
+
 
