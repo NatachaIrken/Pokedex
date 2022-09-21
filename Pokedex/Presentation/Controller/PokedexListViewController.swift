@@ -84,11 +84,10 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
         let viewController = PokedexDetailViewController()
 
         let pokemonObject = pokemonList?[indexPath.row]
-        viewController.pokeTitle = pokemonObject?.name ?? ""
-        viewController.des = pokemonObject?.description ?? ""
+        viewController.pokemonModel = pokemonObject
         navigationController?.pushViewController(viewController, animated: true)
     }
-
 }
+
 
 

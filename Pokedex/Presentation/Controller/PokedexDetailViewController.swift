@@ -10,22 +10,18 @@ import UIKit
 
 class PokedexDetailViewController: UIViewController {
 
-    var pokeTitle = ""
-    var des = ""
-
     var pokeDescription = UILabel()
-    var pokeImage = UIImage()
+    var pokemonModel: PokemonListModel?
 
     override func viewDidLoad() {
-        title = pokeTitle
+        title = pokemonModel?.name
         view.backgroundColor = .white
         prepareLabel()
-        
     }
 
     private func prepareLabel() {
         pokeDescription.translatesAutoresizingMaskIntoConstraints = false
-        pokeDescription.text = des
+        pokeDescription.text = pokemonModel?.description.capitalized
         pokeDescription.numberOfLines = 0
         view.addSubview(pokeDescription)
         NSLayoutConstraint.activate([
@@ -35,5 +31,5 @@ class PokedexDetailViewController: UIViewController {
             pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
 }
+
