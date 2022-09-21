@@ -38,10 +38,10 @@ class PokedexListViewController: UIViewController {
 
     func prepareTableView() {
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(PokedexViewCell.self, forCellReuseIdentifier: "Cell")
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -69,16 +69,23 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].description ?? ""
+        let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
+        guard let pokeImageUrl = url else { return UITableViewCell() }
+        cell.profileImageView.load(url: pokeImageUrl)
+        cell.detailLabel.text = pokemonList?[indexPath.row].description ?? "descripcion"
+
+
+  //      cell.profileImageView.image = pokemonList?[indexPath.row].imageUrl
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = PokedexDetailViewController()

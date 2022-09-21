@@ -23,10 +23,10 @@ class PokedexViewCell: UITableViewCell {
        super.init(coder: aDecoder)
     }
 
-  /*  func prepareCell() {
-        
-        profileImageView.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true profileImageView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true profileImageView.widthAnchor.constraint(equalToConstant:70).isActive = true profileImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
-    } */
+   /* func prepareCell() {
+
+        profileImageView.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true profileImageView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true profileImageView.widthAnchor.constraint(equalToConstant:70).isActive = true; profileImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
+    }*/
 
   let profileImageView: UIImageView = {
              let image = UIImageView()
@@ -39,7 +39,7 @@ class PokedexViewCell: UITableViewCell {
 
     let nameLabel: UILabel = {
             let label = UILabel()
-            label.font = UIFont.boldSystemFont(ofSize: 20)
+            label.font = UIFont.boldSystemFont(ofSize: 60)
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
     }()
