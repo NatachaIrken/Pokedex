@@ -81,29 +81,11 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
         return 100
     }
 
-    func pokeImageView() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let pokeImage: UIImageView = {
-
-            let img = UIImageView()
-            img.contentMode = .scaleAspectFill
-            img.translatesAutoresizingMaskIntoConstraints = false
-            img.layer.cornerRadius = 35
-            img.clipsToBounds = true
-
-            return img
-        }()
+        let viewController = PokedexDetailViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
-
-  //  let nameLabel: UILabel = {
-
-     //   let label = UILabel()
-    //    label.font = UIFont.boldSystemFont(ofSize: 20)
-    //    label.translatesAutoresizingMaskIntoConstraints = false
-
-   //     return label
-   // }()
-
 
 }
 
