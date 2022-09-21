@@ -69,9 +69,7 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //      let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].description ?? ""
         return cell
@@ -81,9 +79,13 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
         return 100
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = PokedexDetailViewController()
+
+        let pokemonObject = pokemonList?[indexPath.row]
+        viewController.pokeTitle = pokemonObject?.name ?? ""
+        viewController.des = pokemonObject?.description ?? ""
         navigationController?.pushViewController(viewController, animated: true)
     }
 

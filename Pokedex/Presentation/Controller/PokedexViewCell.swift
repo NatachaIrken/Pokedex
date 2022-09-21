@@ -28,7 +28,7 @@ class PokedexViewCell: UITableViewCell {
         profileImageView.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true profileImageView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true profileImageView.widthAnchor.constraint(equalToConstant:70).isActive = true profileImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
     } */
 
-    let profileImageView: UIImageView = {
+  let profileImageView: UIImageView = {
              let image = UIImageView()
              image.contentMode = .scaleAspectFill
              image.translatesAutoresizingMaskIntoConstraints = false
