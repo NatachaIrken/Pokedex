@@ -74,14 +74,10 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
         let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
         guard let pokeImageUrl = url else { return UITableViewCell() }
 
-
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].type ?? ""
 
         cell.imageView?.load(url: pokeImageUrl)
-
-        //cell.profileImageView.load(url: pokeImageUrl)
-       // cell.detailLabel.text = pokemonList?[indexPath.row].description ?? "descripcion"
 
         return cell
     }

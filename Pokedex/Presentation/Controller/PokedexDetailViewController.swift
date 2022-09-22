@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import SDWebImage
+
 
 class PokedexDetailViewController: UIViewController {
 
     var pokeDescription = UILabel()
-    var pokeImage = UIImageView()
+    var pokeImage = SDAnimatedImageView()
     var pokemonModel: PokemonListModel?
 
     override func viewDidLoad() {
@@ -51,7 +53,9 @@ class PokedexDetailViewController: UIViewController {
             pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
         ])
     }
+
 }
+
 
 extension UIImageView {
     func load(url: URL) {
