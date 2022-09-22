@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 class PokedexListViewController: UIViewController {
 
@@ -72,12 +72,13 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
         //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
-        guard let pokeImageUrl = url else { return UITableViewCell() }
+        guard url != nil else { return UITableViewCell() }
 
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].type ?? ""
 
-        cell.imageView?.load(url: pokeImageUrl)
+        cell.imageView as? SDAnimatedImageView
+        cell.imageView?.sd_setImage(with: url)
 
         return cell
     }

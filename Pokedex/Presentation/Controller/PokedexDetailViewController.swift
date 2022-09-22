@@ -28,8 +28,8 @@ class PokedexDetailViewController: UIViewController {
         view.addSubview(pokeDescription)
         let url = URL(string: pokemonModel?.imageUrl ?? "")
         pokeImage.translatesAutoresizingMaskIntoConstraints = false
-        guard let pokeImageUrl = url else { return }
-        pokeImage.load(url: pokeImageUrl)
+        guard url != nil else { return }
+        pokeImage.sd_setImage(with: url)
         pokeImage.contentMode = .scaleAspectFit
 
         NSLayoutConstraint.activate([
@@ -53,20 +53,5 @@ class PokedexDetailViewController: UIViewController {
             pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
         ])
     }
-
 }
 
-
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
