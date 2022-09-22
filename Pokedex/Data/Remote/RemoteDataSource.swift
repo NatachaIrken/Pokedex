@@ -13,7 +13,7 @@ class RemoteDataSource: RemoteDataSourceProtocol {
     static let shared = RemoteDataSource()
 
     let BASE_URL = Endpoints.urlBase + Endpoints.endpoints.pokemonList
-    //New Function
+    
     func fetchPokemon(completion: @escaping ([PokemonListDTO]?) -> ()) {
 
 
@@ -28,7 +28,6 @@ class RemoteDataSource: RemoteDataSourceProtocol {
                     let decoder = JSONDecoder()
                     let dataArray = try decoder.decode([PokemonListDTO].self, from: safeData)
                     completion(dataArray)
-                    print(dataArray)
                 } catch let error {
                     completion(nil)
                     print("Ha ocurrido un error: \(error.localizedDescription)")

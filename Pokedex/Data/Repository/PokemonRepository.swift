@@ -19,12 +19,15 @@ struct PokemonRepository: PokemonRepositoryProtocol {
     func fetchPokemon(completion: @escaping ([PokemonListModel]?) -> ()) {
 
         dataSource.fetchPokemon(completion: { pokemonListDTO in
-            pokemonListDTO?.forEach { pokemonDTO in
+            let pokemonListModel = pokemonListDTO?.map { pokemonDTO in
 
-                var pokemonListModel = PokemonListModel(
+                PokemonListModel(
                     attack: pokemonDTO.attack,
                     defense: pokemonDTO.defense,
                     description: pokemonDTO.description,
+                    evolutionChain: pokemonDTO.evolutionChainDTO?.map { evolutionChainDTO in
+                        return EvolutionChainModel(id: evolutionChainDTO.id, name: evolutionChainDTO.name)
+                    },
                     height: pokemonDTO.height,
                     id: pokemonDTO.id,
                     imageUrl: pokemonDTO.imageUrl,
@@ -33,6 +36,8 @@ struct PokemonRepository: PokemonRepositoryProtocol {
                     weight: pokemonDTO.weight
                 )
             }
+            completion(pokemonListModel)
+            print("REPOSITORY",pokemonListModel)
         })
     }
 }

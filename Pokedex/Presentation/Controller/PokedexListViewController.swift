@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PokedexListViewController: UIViewController {
 
     var viewModel: PokemonListViewModelProtocol!
+    var pokemonList: [PokemonListModel]?
+    var tableView = UITableView()
 
     init(viewModel: PokemonListViewModelProtocol) {
         self.viewModel = viewModel
@@ -21,7 +24,77 @@ class PokedexListViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        viewModel.getPokemon()
-        view.backgroundColor = .red
+        view.backgroundColor = .systemCyan
+        setUpNavigation()
+        getPokemons()
+        prepareTableView()
+    }
+
+    func setUpNavigation() {
+        navigationItem.title = "Pokedex"
+        self.navigationController?.navigationBar.barTintColor = .systemCyan
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+
+    func prepareTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        //tableView.register(PokedexViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.separatorStyle = .none
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+
+    func getPokemons() {
+
+        viewModel.getPokemon { [weak self] pokemonList in
+            self?.pokemonList = pokemonList
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 }
+
+extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.pokemonList?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
+        let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
+        guard url != nil else { return UITableViewCell() }
+
+        cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
+        cell.detailTextLabel?.text = pokemonList?[indexPath.row].type ?? ""
+
+        cell.imageView as? SDAnimatedImageView
+        cell.imageView?.sd_setImage(with: url)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = PokedexDetailViewController()
+
+        let pokemonObject = pokemonList?[indexPath.row]
+        viewController.pokemonModel = pokemonObject
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+
+
