@@ -41,8 +41,8 @@ class PokedexListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(PokedexViewCell.self, forCellReuseIdentifier: "Cell")
-
+        //tableView.register(PokedexViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.separatorStyle = .none
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -69,17 +69,20 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
-        cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
-        cell.detailTextLabel?.text = pokemonList?[indexPath.row].description ?? ""
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
         guard let pokeImageUrl = url else { return UITableViewCell() }
-        cell.profileImageView.load(url: pokeImageUrl)
-        cell.detailLabel.text = pokemonList?[indexPath.row].description ?? "descripcion"
 
 
-  //      cell.profileImageView.image = pokemonList?[indexPath.row].imageUrl
-        
+        cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
+        cell.detailTextLabel?.text = pokemonList?[indexPath.row].type ?? ""
+
+        cell.imageView?.load(url: pokeImageUrl)
+
+        //cell.profileImageView.load(url: pokeImageUrl)
+       // cell.detailLabel.text = pokemonList?[indexPath.row].description ?? "descripcion"
+
         return cell
     }
 
