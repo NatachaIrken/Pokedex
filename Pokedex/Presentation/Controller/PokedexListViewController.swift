@@ -69,7 +69,6 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
         guard url != nil else { return UITableViewCell() }

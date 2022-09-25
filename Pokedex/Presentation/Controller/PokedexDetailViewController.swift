@@ -15,12 +15,15 @@ class PokedexDetailViewController: UIViewController {
     var pokeDescription = UILabel()
     var pokeImage = SDAnimatedImageView()
     var pokemonModel: PokemonListModel?
+    var evolutionChange2: EvolutionChainModel?
+    let tableViewDetail = UITableView()
 
     override func viewDidLoad() {
         title = pokemonModel?.name.capitalized
         view.backgroundColor = .white
         showImage()
         prepareLabel()
+        configureTableViewDetail()
     }
 
     func showImage() {
@@ -53,5 +56,32 @@ class PokedexDetailViewController: UIViewController {
             pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
         ])
     }
+
+    func configureTableViewDetail() {
+        view.addSubview(tableViewDetail)
+        tableViewDetail.translatesAutoresizingMaskIntoConstraints = false
+        tableViewDetail.dataSource = self
+        tableViewDetail.delegate = self
+
+        NSLayoutConstraint.activate([
+            tableViewDetail.topAnchor.constraint(equalTo: pokeDescription.bottomAnchor, constant: 10),
+            tableViewDetail.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  20),
+            tableViewDetail.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            tableViewDetail.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
+    }
 }
 
+extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.textLabel?.text = "Evolution"
+       return cell
+    }
+
+}
