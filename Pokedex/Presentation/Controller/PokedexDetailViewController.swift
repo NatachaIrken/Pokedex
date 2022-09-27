@@ -79,9 +79,9 @@ extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].id
-        cell.detailTextLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].name
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        cell.textLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].name
+        cell.detailTextLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].id
         return cell
     }
 
