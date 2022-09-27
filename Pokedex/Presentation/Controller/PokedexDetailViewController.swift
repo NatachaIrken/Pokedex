@@ -15,7 +15,7 @@ class PokedexDetailViewController: UIViewController {
     var pokeDescription = UILabel()
     var pokeImage = SDAnimatedImageView()
     var pokemonModel: PokemonListModel?
-    var evolutionChange2: EvolutionChainModel?
+    var fullPokemonModel: [PokemonListModel]?
     let tableViewDetail = UITableView()
 
     override func viewDidLoad() {
@@ -75,13 +75,14 @@ class PokedexDetailViewController: UIViewController {
 extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        pokemonModel?.evolutionChain?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "Evolution"
-       return cell
+        cell.textLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].id
+        cell.detailTextLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].name
+        return cell
     }
 
 }

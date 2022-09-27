@@ -88,8 +88,12 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = PokedexDetailViewController()
-
+        let index = indexPath.row+1
         let pokemonObject = pokemonList?[indexPath.row]
+        if ((pokemonObject?.evolutionChain) != nil) {
+
+        }
+        viewController.fullPokemonModel = pokemonList
         viewController.pokemonModel = pokemonObject
         navigationController?.pushViewController(viewController, animated: true)
     }
