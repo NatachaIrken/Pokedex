@@ -11,7 +11,7 @@ import SDWebImage
 class PokedexListViewController: UIViewController {
 
     var viewModel: PokemonListViewModelProtocol!
-    var pokemonList: [PokemonListModel]?
+    var pokemonList: [PokemonModel]?
     var tableView = UITableView()
 
     init(viewModel: PokemonListViewModelProtocol) {
@@ -88,13 +88,28 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = PokedexDetailViewController()
-        let index = indexPath.row+1
         let pokemonObject = pokemonList?[indexPath.row]
-        if ((pokemonObject?.evolutionChain) != nil) {
 
+        var pokemonIdEvolutions =  [String]()
+        var pokemonImageEvolution = [String]()
+
+        pokemonList?.forEach { pokemon in
+            if pokemon.id == pokemonObject?.id {
+                pokemon.evolutionChain?.forEach { evolution in
+                    pokemonIdEvolutions.append(evolution.id ?? "")
+                }
+            }
+
+            pokemonIdEvolutions.forEach { evolutionId in
+                if evolutionId == String(pokemon.id) {
+                    pokemonImageEvolution.append(pokemon.imageUrl)
+                }
+            }
         }
-        viewController.fullPokemonModel = pokemonList
+
         viewController.pokemonModel = pokemonObject
+        viewController.imagePokemonEvolutions = pokemonImageEvolution
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -16,12 +16,12 @@ struct PokemonRepository: PokemonRepositoryProtocol {
         self.dataSource = dataSource
     }
 
-    func fetchPokemon(completion: @escaping ([PokemonListModel]?) -> ()) {
+    func fetchPokemon(completion: @escaping ([PokemonModel]?) -> ()) {
 
         dataSource.fetchPokemon(completion: { pokemonListDTO in
             let pokemonListModel = pokemonListDTO?.map { pokemonDTO in
 
-                PokemonListModel(
+                PokemonModel(
                     attack: pokemonDTO.attack,
                     defense: pokemonDTO.defense,
                     description: pokemonDTO.description,

@@ -14,9 +14,9 @@ class PokedexDetailViewController: UIViewController {
 
     var pokeDescription = UILabel()
     var pokeImage = SDAnimatedImageView()
-    var pokemonModel: PokemonListModel?
-    var fullPokemonModel: [PokemonListModel]?
+    var pokemonModel: PokemonModel?
     let tableViewDetail = UITableView()
+    var imagePokemonEvolutions = [String]()
 
     override func viewDidLoad() {
         title = pokemonModel?.name.capitalized
@@ -80,9 +80,14 @@ extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.textLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].name
+        cell.textLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].name?.capitalized
         cell.detailTextLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].id
+        let url = URL(string: imagePokemonEvolutions[indexPath.row] ?? "")
+        cell.imageView as? SDAnimatedImageView
+        cell.imageView?.sd_setImage(with: url)
+        
         return cell
+
     }
 
 }
