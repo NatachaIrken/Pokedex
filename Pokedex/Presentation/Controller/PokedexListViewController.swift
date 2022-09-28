@@ -11,7 +11,7 @@ import SDWebImage
 class PokedexListViewController: UIViewController {
 
     var viewModel: PokemonListViewModelProtocol!
-    var pokemonList: [PokemonListModel]?
+    var pokemonList: [PokemonModel]?
     var tableView = UITableView()
 
     init(viewModel: PokemonListViewModelProtocol) {
@@ -69,7 +69,6 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PokedexViewCell
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
         guard url != nil else { return UITableViewCell() }
@@ -89,9 +88,28 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = PokedexDetailViewController()
-
         let pokemonObject = pokemonList?[indexPath.row]
+
+        var pokemonIdEvolutions =  [String]()
+        var pokemonImageEvolution = [String]()
+
+        pokemonList?.forEach { pokemon in
+            if pokemon.id == pokemonObject?.id {
+                pokemon.evolutionChain?.forEach { evolution in
+                    pokemonIdEvolutions.append(evolution.id ?? "")
+                }
+            }
+
+            pokemonIdEvolutions.forEach { evolutionId in
+                if evolutionId == String(pokemon.id) {
+                    pokemonImageEvolution.append(pokemon.imageUrl)
+                }
+            }
+        }
+
         viewController.pokemonModel = pokemonObject
+        viewController.imagePokemonEvolutions = pokemonImageEvolution
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

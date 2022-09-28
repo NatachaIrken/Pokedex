@@ -9,14 +9,14 @@ import Foundation
 
 protocol PokemonListViewModelProtocol  {
 
-    var getPokemonCallback: (([PokemonListModel]?) -> Void)? { get set }
+    var getPokemonCallback: (([PokemongitModel]?) -> Void)? { get set }
 
-    func getPokemon(completion: @escaping([PokemonListModel]?) -> ())
+    func getPokemon(completion: @escaping([PokemonModel]?) -> ())
 }
 
 class PokemonListViewModel: PokemonListViewModelProtocol {
 
-    func getPokemon(completion: @escaping ([PokemonListModel]?) -> ()) {
+    func getPokemon(completion: @escaping ([PokemonModel]?) -> ()) {
         fetchPokemonUseCase.execute { pokemonList in
 //            self.getPokemonCallback?(pokemonList)
             completion(pokemonList)
@@ -24,9 +24,9 @@ class PokemonListViewModel: PokemonListViewModelProtocol {
         }
     }
 
-    var getPokemonCallback: (([PokemonListModel]?) -> Void)?
+    var getPokemonCallback: (([PokemonModel]?) -> Void)?
 
-    var pokemonModel: [PokemonListModel]?
+    var pokemonModel: [PokemonModel]?
 
     let fetchPokemonUseCase: FetchPokemonUseCase
 

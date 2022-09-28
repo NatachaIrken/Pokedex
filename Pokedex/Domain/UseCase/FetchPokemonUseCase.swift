@@ -16,7 +16,7 @@ struct FetchPokemonUseCase {
         self.pokemonRepository = pokemonRepository
     }
     
-    func execute(completion: @escaping([PokemonListModel]?) -> ()) {
+    func execute(completion: @escaping([PokemonModel]?) -> ()) {
         pokemonRepository.fetchPokemon(completion: completion)
     }
 }

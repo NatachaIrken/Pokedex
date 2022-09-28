@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonListModel: Identifiable {
+struct PokemonModel: Identifiable {
 
     let attack: Int
     let defense: Int
@@ -19,7 +19,6 @@ struct PokemonListModel: Identifiable {
     let name: String
     let type: String
     let weight: Int
-
 }
 
 struct EvolutionChainModel: Decodable {
