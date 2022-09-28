@@ -88,27 +88,23 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = PokedexDetailViewController()
-        let pokemonObject = pokemonList?[indexPath.row]
-
-        var pokemonIdEvolutions =  [String]()
-        var pokemonImageEvolution = [String]()
+        var pokemonObject = pokemonList?[indexPath.row]
 
         pokemonList?.forEach { pokemon in
             if pokemon.id == pokemonObject?.id {
-                pokemon.evolutionChain?.forEach { evolution in
-                    pokemonIdEvolutions.append(evolution.id ?? "")
-                }
-            }
-
-            pokemonIdEvolutions.forEach { evolutionId in
-                if evolutionId == String(pokemon.id) {
-                    pokemonImageEvolution.append(pokemon.imageUrl)
-                }
+                let newPokemonChain: [EvolutionChainModel] = pokemon.evolutionChain?.map { evolution in
+                    let pokemonChainImageUrl = pokemonList?.first { pokemon in
+                        String(pokemon.id) == evolution.id
+                    }
+                    var newEvolutionChainModel = evolution
+                    newEvolutionChainModel.imageUrl = pokemonChainImageUrl?.imageUrl
+                    return newEvolutionChainModel
+                } ?? []
+                pokemonObject?.evolutionChain = newPokemonChain
             }
         }
 
         viewController.pokemonModel = pokemonObject
-        viewController.imagePokemonEvolutions = pokemonImageEvolution
 
         navigationController?.pushViewController(viewController, animated: true)
     }

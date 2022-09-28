@@ -9,7 +9,7 @@ import Foundation
 
 protocol PokemonListViewModelProtocol  {
 
-    var getPokemonCallback: (([PokemongitModel]?) -> Void)? { get set }
+    var getPokemonCallback: (([PokemonModel]?) -> Void)? { get set }
 
     func getPokemon(completion: @escaping([PokemonModel]?) -> ())
 }

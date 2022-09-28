@@ -82,7 +82,7 @@ extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.textLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].name?.capitalized
         cell.detailTextLabel?.text = pokemonModel?.evolutionChain?[indexPath.row].id
-        let url = URL(string: imagePokemonEvolutions[indexPath.row] ?? "")
+        let url = URL(string: pokemonModel?.evolutionChain?[indexPath.row].imageUrl ?? "")
         cell.imageView as? SDAnimatedImageView
         cell.imageView?.sd_setImage(with: url)
         
