@@ -8,10 +8,8 @@
 import Foundation
 
 protocol PokemonListViewModelProtocol  {
-
     var getPokemonCallback: (([PokemonModel]?) -> Void)? { get set }
-
-    func getPokemon(completion: @escaping([PokemonModel]?) -> ())
+    func getPokemon(completion: @escaping(Result<[PokemonModel], PokemonError>) -> ())
 }
 
 class PokemonListViewModel: PokemonListViewModelProtocol {
@@ -20,12 +18,13 @@ class PokemonListViewModel: PokemonListViewModelProtocol {
         self.fetchPokemonUseCase = DIContainer.fetchPokemonUseCase
     }
 
-    func getPokemon(completion: @escaping ([PokemonModel]?) -> ()) {
-        fetchPokemonUseCase.execute { pokemonList in
-            if pokemonList != nil {
-                completion(pokemonList)
-            } else {
-                completion([])
+    func getPokemon(completion: @escaping (Result<[PokemonModel], PokemonError>) -> ()) {
+        fetchPokemonUseCase.execute { result in
+            switch result {
+            case .success(let pokemonList):
+                completion(.success(pokemonList))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

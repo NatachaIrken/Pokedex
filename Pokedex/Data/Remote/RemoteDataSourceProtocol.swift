@@ -8,6 +8,6 @@
 import Foundation
 
 protocol RemoteDataSourceProtocol {
-    func fetchPokemon(completion:@escaping([PokemonListDTO]?) -> ())
+    func fetchPokemon(completion:@escaping(Result<[PokemonListDTO], PokemonError>) -> ())
 }
 
