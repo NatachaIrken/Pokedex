@@ -16,11 +16,17 @@ protocol PokemonListViewModelProtocol  {
 
 class PokemonListViewModel: PokemonListViewModelProtocol {
 
+    init(fetchPokemonUseCase: FetchPokemonUseCase) {
+        self.fetchPokemonUseCase = DIContainer.fetchPokemonUseCase
+    }
+
     func getPokemon(completion: @escaping ([PokemonModel]?) -> ()) {
         fetchPokemonUseCase.execute { pokemonList in
-//            self.getPokemonCallback?(pokemonList)
-            completion(pokemonList)
-//            print(pokemonList)
+            if pokemonList != nil {
+                completion(pokemonList)
+            } else {
+                completion([])
+            }
         }
     }
 
@@ -29,13 +35,4 @@ class PokemonListViewModel: PokemonListViewModelProtocol {
     var pokemonModel: [PokemonModel]?
 
     let fetchPokemonUseCase: FetchPokemonUseCase
-
-    init(fetchPokemonUseCase: FetchPokemonUseCase) {
-        self.fetchPokemonUseCase = fetchPokemonUseCase
-    }
 }
-
-
-//infracestructura para que el view model tenga los casos de uso como dependencias para llamar al repositorio.
- // hacer protocol viewmodel, agregar la funcion necesaria
-
