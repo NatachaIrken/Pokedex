@@ -17,13 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
-//        let colectionView = UICollectionViewFlowLayout()
-        let remote = RemoteDataSource()
-        let repository = PokemonRepository(dataSource: remote)
-        let fetchPokemonUseCase = FetchPokemonUseCase(pokemonRepository: repository)
-        
-        let viewModel = PokemonListViewModel(fetchPokemonUseCase: fetchPokemonUseCase)
-        let navController = UINavigationController(rootViewController: PokedexListViewController(viewModel: viewModel))
+
+        let navController = UINavigationController(rootViewController: PokedexListViewController(viewModel: DIContainer.viewModel))
         window?.rootViewController = navController
     }
 
