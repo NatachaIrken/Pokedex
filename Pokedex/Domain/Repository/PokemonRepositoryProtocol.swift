@@ -9,7 +9,6 @@ import Foundation
 
 
 protocol PokemonRepositoryProtocol {
-
     // repo puerta entrada y salida datos desde el dominio
-    func fetchPokemon(completion:@escaping([PokemonModel]?) -> ())
+    func fetchPokemon(completion:@escaping(Result<[PokemonModel], PokemonError>) -> ())
 }

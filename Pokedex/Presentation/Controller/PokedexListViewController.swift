@@ -53,11 +53,30 @@ class PokedexListViewController: UIViewController {
 
     func getPokemons() {
 
-        viewModel.getPokemon { [weak self] pokemonList in
-            self?.pokemonList = pokemonList
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        viewModel.getPokemon { [weak self] result in
+            switch result {
+            case .success(let pokemonList):
+                self?.pokemonList = pokemonList
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                self?.parseError(error)
             }
+        }
+    }
+
+    func parseError(_ error: PokemonError){
+        switch error {
+        case .apiError, .malformedUrl:
+            //label error text servicio no disponible
+            break
+        case .emptyError:
+            // no se encontro pokemones
+            break
+        case .decodeError:
+            // error al obtener pokemones
+            break
         }
     }
 }
