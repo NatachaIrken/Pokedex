@@ -11,7 +11,6 @@ struct PokemonRepository: PokemonRepositoryProtocol {
 
     var dataSource: RemoteDataSourceProtocol
     
-// siempre protocolo en el init
     init(dataSource: RemoteDataSourceProtocol) {
         self.dataSource = dataSource
     }
