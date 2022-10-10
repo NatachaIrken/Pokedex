@@ -18,9 +18,7 @@ class PokemonListViewModel: PokemonListViewModelProtocol {
 
     func getPokemon(completion: @escaping ([PokemonModel]?) -> ()) {
         fetchPokemonUseCase.execute { pokemonList in
-//            self.getPokemonCallback?(pokemonList)
             completion(pokemonList)
-//            print(pokemonList)
         }
     }
 

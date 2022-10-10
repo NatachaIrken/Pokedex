@@ -73,11 +73,42 @@ extension PokedexListViewController: UITableViewDelegate, UITableViewDataSource 
         let url = URL(string: pokemonList?[indexPath.row].imageUrl ?? "")
         guard url != nil else { return UITableViewCell() }
 
+        cell.selectionStyle = .none
         cell.textLabel?.text  = pokemonList?[indexPath.row].name.capitalized ?? ""
         cell.detailTextLabel?.text = pokemonList?[indexPath.row].type ?? ""
 
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
+        cell.detailTextLabel?.layer.masksToBounds = true
+        cell.detailTextLabel?.layer.cornerRadius = 5
+
+        switch pokemonList?[indexPath.row].type {
+        case "poison" :
+            cell.detailTextLabel?.textColor = .white
+            cell.detailTextLabel?.backgroundColor = .purple
+            cell.detailTextLabel?.font =  UIFont.boldSystemFont(ofSize: 12.0)
+        case "fire" :
+            cell.detailTextLabel?.textColor = .white
+            cell.detailTextLabel?.backgroundColor = .red
+            cell.detailTextLabel?.font =  UIFont.boldSystemFont(ofSize: 12.0)
+        case "water" :
+            cell.detailTextLabel?.textColor = .white
+            cell.detailTextLabel?.backgroundColor = .blue
+            cell.detailTextLabel?.font =  UIFont.boldSystemFont(ofSize: 12.0)
+
+        default:
+            cell.detailTextLabel?.textColor = .black
+        }
         cell.imageView as? SDAnimatedImageView
         cell.imageView?.sd_setImage(with: url)
+
+        cell.imageView?.backgroundColor = .lightText
+        cell.imageView?.layer.cornerRadius = 55.0
+
+        cell.imageView?.layer.shadowColor = UIColor.black.cgColor
+        cell.imageView?.layer.shadowOpacity = 0.2
+        cell.imageView?.layer.shadowOffset = .zero
+        cell.imageView?.layer.shadowRadius = 9
+        cell.imageView?.layer.shouldRasterize = true
 
         return cell
     }

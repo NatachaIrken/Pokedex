@@ -17,6 +17,7 @@ class PokedexDetailViewController: UIViewController {
     var pokemonModel: PokemonModel?
     let tableViewDetail = UITableView()
     var imagePokemonEvolutions = [String]()
+    let containerImage = UIView()
 
     override func viewDidLoad() {
         title = pokemonModel?.name.capitalized
@@ -35,12 +36,22 @@ class PokedexDetailViewController: UIViewController {
         pokeImage.sd_setImage(with: url)
         pokeImage.contentMode = .scaleAspectFit
 
+        pokeImage.backgroundColor = .lightText
+        pokeImage.layer.cornerRadius = 15.0
+
+        pokeImage.layer.shadowColor = UIColor.black.cgColor
+        pokeImage.layer.shadowOpacity = 0.6
+        pokeImage.layer.shadowOffset = .zero
+        pokeImage.layer.shadowRadius = 25
+        pokeImage.layer.shouldRasterize = true
+
+
         NSLayoutConstraint.activate([
             pokeImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             pokeImage.heightAnchor.constraint(equalToConstant: 300),
             pokeImage.widthAnchor.constraint(equalToConstant: 300),
             pokeImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pokeImage.bottomAnchor.constraint(equalTo: pokeDescription.topAnchor, constant: 10)
+            pokeImage.bottomAnchor.constraint(equalTo: pokeDescription.topAnchor, constant: -10)
         ])
     }
 
@@ -53,7 +64,7 @@ class PokedexDetailViewController: UIViewController {
             pokeDescription.topAnchor.constraint(equalTo: pokeImage.bottomAnchor, constant: 10),
             pokeDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             pokeDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
+            //pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
         ])
     }
 
@@ -62,12 +73,23 @@ class PokedexDetailViewController: UIViewController {
         tableViewDetail.translatesAutoresizingMaskIntoConstraints = false
         tableViewDetail.dataSource = self
         tableViewDetail.delegate = self
+        tableViewDetail.layer.cornerRadius = 15.0
+
+
+
+        tableViewDetail.layer.shadowColor = UIColor.black.cgColor
+        tableViewDetail.layer.shadowOpacity = 0.9
+        tableViewDetail.layer.shadowOffset = .zero
+        tableViewDetail.layer.shadowRadius = 30
+        tableViewDetail.layer.shouldRasterize = true
+        tableViewDetail.layer.borderWidth = 0.2
+        tableViewDetail.layer.borderColor = UIColor.gray.cgColor
 
         NSLayoutConstraint.activate([
             tableViewDetail.topAnchor.constraint(equalTo: pokeDescription.bottomAnchor, constant: 10),
             tableViewDetail.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  20),
             tableViewDetail.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            tableViewDetail.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            tableViewDetail.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -2)
         ])
     }
 }
