@@ -8,7 +8,6 @@
 import Foundation
 
 struct PokemonRepository: PokemonRepositoryProtocol {
-
     var dataSource: RemoteDataSourceProtocol
     
     init(dataSource: RemoteDataSourceProtocol) {
@@ -42,4 +41,3 @@ struct PokemonRepository: PokemonRepositoryProtocol {
         }
     }
 }
-

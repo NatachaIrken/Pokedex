@@ -8,12 +8,9 @@
 import Foundation
 
 enum Endpoints {
-
     static let urlBase = "https://pokedex-bb36f.firebaseio.com"
 
     enum endpoints {
-
         static let pokemonList = "/pokemon.json"
     }
 }
-

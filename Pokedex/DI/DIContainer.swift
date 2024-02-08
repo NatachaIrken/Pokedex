@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DIContainer {
+struct DIContainer {
     static let remote: RemoteDataSourceProtocol = RemoteDataSource()
     static let repository: PokemonRepositoryProtocol = PokemonRepository(dataSource: remote)
     static let fetchPokemonUseCase: FetchPokemonUseCase = FetchPokemonUseCase(pokemonRepository: repository)

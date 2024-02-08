@@ -13,11 +13,10 @@ protocol PokemonListViewModelProtocol  {
 }
 
 class PokemonListViewModel: PokemonListViewModelProtocol {
-
     init(fetchPokemonUseCase: FetchPokemonUseCase) {
         self.fetchPokemonUseCase = DIContainer.fetchPokemonUseCase
     }
-
+    
     func getPokemon(completion: @escaping (Result<[PokemonModel], PokemonError>) -> ()) {
         fetchPokemonUseCase.execute { result in
             switch result {
@@ -28,10 +27,8 @@ class PokemonListViewModel: PokemonListViewModelProtocol {
             }
         }
     }
-
+    
     var getPokemonCallback: (([PokemonModel]?) -> Void)?
-
     var pokemonModel: [PokemonModel]?
-
     let fetchPokemonUseCase: FetchPokemonUseCase
 }

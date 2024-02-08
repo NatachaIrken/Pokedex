@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 struct FetchPokemonUseCase {
-
     var pokemonRepository: PokemonRepositoryProtocol
 
     init(pokemonRepository: PokemonRepositoryProtocol) {

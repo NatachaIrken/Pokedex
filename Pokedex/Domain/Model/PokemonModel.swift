@@ -18,8 +18,6 @@ struct PokemonModel: Identifiable {
     let name: String
     let type: String
     let weight: Int
-
-    
 }
 
 struct EvolutionChainModel: Decodable {

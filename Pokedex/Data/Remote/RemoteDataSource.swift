@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 class RemoteDataSource: RemoteDataSourceProtocol {
-
     static let shared = RemoteDataSource()
 
     let BASE_URL = Endpoints.urlBase + Endpoints.endpoints.pokemonList

@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 import SDWebImage
 
-
 class PokedexDetailViewController: UIViewController {
-
     var pokeDescription = UILabel()
     var pokeImage = SDAnimatedImageView()
     var pokemonModel: PokemonModel?
@@ -35,16 +33,14 @@ class PokedexDetailViewController: UIViewController {
         guard url != nil else { return }
         pokeImage.sd_setImage(with: url)
         pokeImage.contentMode = .scaleAspectFit
-
         pokeImage.backgroundColor = .lightText
+        
         pokeImage.layer.cornerRadius = 15.0
-
         pokeImage.layer.shadowColor = UIColor.black.cgColor
         pokeImage.layer.shadowOpacity = 0.6
         pokeImage.layer.shadowOffset = .zero
         pokeImage.layer.shadowRadius = 25
         pokeImage.layer.shouldRasterize = true
-
 
         NSLayoutConstraint.activate([
             pokeImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -64,7 +60,6 @@ class PokedexDetailViewController: UIViewController {
             pokeDescription.topAnchor.constraint(equalTo: pokeImage.bottomAnchor, constant: 10),
             pokeDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             pokeDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            //pokeDescription.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
         ])
     }
 
@@ -74,9 +69,6 @@ class PokedexDetailViewController: UIViewController {
         tableViewDetail.dataSource = self
         tableViewDetail.delegate = self
         tableViewDetail.layer.cornerRadius = 15.0
-
-
-
         tableViewDetail.layer.shadowColor = UIColor.black.cgColor
         tableViewDetail.layer.shadowOpacity = 0.9
         tableViewDetail.layer.shadowOffset = .zero
@@ -95,7 +87,6 @@ class PokedexDetailViewController: UIViewController {
 }
 
 extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         pokemonModel?.evolutionChain?.count ?? 0
     }
@@ -109,7 +100,5 @@ extension PokedexDetailViewController: UITableViewDelegate, UITableViewDataSourc
         cell.imageView?.sd_setImage(with: url)
         
         return cell
-
     }
-
 }
